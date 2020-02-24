@@ -4,15 +4,24 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data;
 
 namespace WebAPI.Controllers
 {
     public class ValuesController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Get()
         {
-            return new string[] { "value1", "value2" };
+            DataTable dt = new DataTable();
+            dt.Columns.Add("DepID");
+            dt.Columns.Add("DepName");
+
+            dt.Rows.Add(1, "IT");
+            dt.Rows.Add(2, "Support");
+
+
+            return Request.CreateResponse(HttpStatusCode.OK, dt);
         }
 
         // GET api/values/5
